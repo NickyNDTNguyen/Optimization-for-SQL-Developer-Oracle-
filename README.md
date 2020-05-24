@@ -1,4 +1,5 @@
 # Optimization for SQL Developer (Oracle)
+![](https://i.imgur.com/2Xe70rC.png)
 
 In this post, I will summarize some techniques to optimize SQL codes from my experience and some courses I went through. To effectively optimize SQL code, it depends on a combination of a lot of following things, such as: your business, your database structure, hardwares and SQL skills, etc.
 
