@@ -1,0 +1,38 @@
+--3NF
+Skinny tables (tables have less columns) = Faster queries
+Oracle stores data in a platter and use an armature to read/write data. Oracle stores data in row after row, so when armature read/write rows, it needs to wait platter spin around from row to row, if the row is too large, it takes time for Oracle to move to the next one.
+Oracle put Index on PK, not FK.
+Put the columns which have high probability to have NULL in value at the end of table. If we have a NULL value at the middle of a row, we still have to go to the end of this row before start to the next row. But if we have the NULL values at the end of row, we can immediately move to next row instead of go to the end of this row.
+
+--Writing SQL
+Avoid SELECT * to restrict number of columns
+Use WHERE to restrict number of rows
+Make sure when use WHERE to compare to a constant value (='A' =120 ='12/12/2020'), the datatypes have to be matched in order to avoid implicit conversion
+Use INTERSECT to determine the unique common values between 2 dataset (It is faster than INNER JOIN). We use INNER join to connect 2 or more tables and take specific columns from them
+Avoid Sub-queries as we can
+We can use IN for multi columns
+Using WITH to avoid rerun sub queries if we need to use those many times
+Use hint APPEND for inserting, that tells Oracle just append new rows at the end of this table, instead of finding deleted rows and insert new rows there.
+The order of tables in FROM clause will affect to runtime of this query. We should put the smallest one at first, then follow by the next smallest. But when we use indexes, the order of those tables in FROM doesn't make sense
+
+--INDEX
+Pros:
+	Avoid full table scan
+	Jump to desired rows
+	Speed up JOIN
+	Speed up COUNT(): Because just count only Index columns will be slimmer than entire table, so it will be faster.
+	Speed up ORDER BY
+	Speed up GROUP BY
+	Avoid duplication
+	Queries will run faster
+Cons:
+	Waste space: So we should create indexes on neccesary columns instead of all
+	Indexes are useful when we access a small portion of database, if we access entire a table, Oracle will ignore the indexes on this table
+	If we create an index on 2 columns but we just use 1 of them in WHERE, this index will not be called, so when we create an index on multi columns, we have to consider carefully whether we need to call these columns at once, otherwise the index will waste space
+	If the returned data is equal or less then 15% of data in a table, the index will be used. Otherwise, Oracle will ignore the index
+	INSERT, DELETE and UPDATE can be slow because not only data is modified, but also the corresponding indexes on this table
+	The index can be affected by Hard Drive. Sometimes, the powerful hardware can help the FULL TABLE SCAN is faster than INDEX scan
+	
+B-tree Index is an upside down of a tree with each leaf is a rowid. We use this kind of index for ID, char, number, date, ...
+Bitmap Index is used for columns with a few distinct values (Ex: male/female)
+Function-Based Index is an index which is built on a function applied to columns (Ex: CREATE INDEX first_name_idx ON user_data (gender, UPPER(first_name), dob)), Oracle developed this kind of index to avoid when we use a function on an index column, this regular index will not be called.
