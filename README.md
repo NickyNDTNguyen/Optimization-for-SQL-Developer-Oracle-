@@ -6,8 +6,8 @@ In this post, I will summarize some techniques to optimize SQL codes from my exp
 It is quite difficult to present all things about SQL optimization exactly and completely, so I will just share about the most basic things. Hope it helps.
 
 To easily approach this knowledge, I separate it into 9 parts:
-  1. [General overview](https://github.com/NickyNDTNguyen/Optimization-for-SQL-Developer-Oracle-/blob/master/1.%20General%20overview.md)
-  2. Build up database structure
+  1. [General overview](./1.%20General%20overview.md)
+  2. [Build up database structure](./2.%20Build%20up%20database%20structure.md)
   3. Re-write your SQL codes
   4. Overview of indexes
   5. 
