@@ -1,0 +1,17 @@
+# GENERAL OVERVIEW
+We have 4 basic ways to optimize SQL queries in Oracle
+  1. Database structure
+  It includes how we design tables in database and arrange columns in a table.
+  Third Normal Form (3NF).
+  ![](https://i.imgur.com/sTa1wfy.png)
+  
+  2. SQL
+  The most useful way to improve performance of codes is rewrite it.
+  Use effectively functions.
+  
+  3. Indexes
+  Pros and cons of indexes.
+  Varieties of Indexes.
+  
+  4. Partition
+  Varieties of Partitions
