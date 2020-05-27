@@ -8,7 +8,7 @@ It is quite difficult to present all things about SQL optimization exactly and c
 To easily approach this knowledge, I separate it into 9 parts:
   1. [General overview](./1.%20General%20overview.md)
   2. [Build up database structure](./2.%20Build%20up%20database%20structure.md)
-  3. Re-write your SQL codes
+  3. [Re-write your SQL codes](./3.%20Re-write%20your%20SQL%20codes.md)
   4. Overview of indexes
   5. 
   6. 
