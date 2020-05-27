@@ -36,3 +36,32 @@ Cons:
 B-tree Index is an upside down of a tree with each leaf is a rowid. We use this kind of index for ID, char, number, date, ...
 Bitmap Index is used for columns with a few distinct values (Ex: male/female)
 Function-Based Index is an index which is built on a function applied to columns (Ex: CREATE INDEX first_name_idx ON user_data (gender, UPPER(first_name), dob)), Oracle developed this kind of index to avoid when we use a function on an index column, this regular index will not be called.
+
+--B-Tree Index
+B-Tree Index is a general purpose index.
+We can index one, two or more columns: simple or composite index.
+Choosing columns to index depends on the columns that are referenced on WHERE clause.
+All ROWID for each value of the column (which we put index) are gathered and placed in the index.
+The space for index is less than entire tables' space, so the armature go through it much faster than entire table.
+Index is used for subsetting data.
+Index is used for data integrity.
+Index is used for speed up join.
+We don't need to create a simple index on a column which is in a composite index. Because when we access only this column, the composite index can also be used.
+The order of columns in a composite index is important.
+(Most selective, Least selective). If we use the second column in WHERE clause, it will lead to use INDEX SKIP SCAN.
+(Least distinctive, Most distinctive). That means put the highest unique values column first, it will help to reduce number of rows in result set.
+Index is used for quality and range conditions (=,>,< BETWEEN) and the not equal conditions, such as: !=, <>, IS NOT won't be considered. In other words, Indexes are used to find data that is there, not for the data that is not there.
+
+
+
+
+
+Clips need to be checked:
+2. Infrequent Column
+
+4. Function-Based Index
+4. Gathering Statistics 
+4. Index and Partition interaction
+4. Example
+5. Create B-tree index
+5. Gathering Statistics 
