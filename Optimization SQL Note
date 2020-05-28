@@ -52,6 +52,57 @@ The order of columns in a composite index is important.
 (Least distinctive, Most distinctive). That means put the highest unique values column first, it will help to reduce number of rows in result set.
 Index is used for quality and range conditions (=,>,< BETWEEN) and the not equal conditions, such as: !=, <>, IS NOT won't be considered. In other words, Indexes are used to find data that is there, not for the data that is not there.
 
+CREATE INDEX index_name ON table_name(column_name);
+--
+SELECT OWNER, TABLE_NAME, TABLESPACE_NAME FROM ALL_TABLES WHERE OWNER='SCOTT' ORDER BY TABLE_NAME;
+SELECT TABLE_NAME, TABLESPACE_NAME FROM USER_TABLES ORDER BY TABLE_NAME;
+--
+SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE, DATA_LENGTH, NULLABLE FROM ALL_TAB_COLUMNS WHERE OWNER='SCOTT' AND TABLE_NAME='CANDYBAR_FACT' ORDER BY COLUMN_ID;
+SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE, DATA_LENGTH, NULLABLE FROM USER_TAB_COLUMNS WHERE TABLE_NAME='CANDYBAR_FACT' ORDER BY COLUMN_ID;
+--
+SELECT OWNER, INDEX_NAME, TABLE_OWNER, TABLE_NAME, TABLESPACE_NAME FROM ALL_INDEXES WHERE OWNER='SCOTT' ORDER BY INDEX_NAME, TABLE_OWNER, TABLE_NAME;
+SELECT INDEX_NAME, TABLE_OWNER, TABLE_NAME, TABLESPACE_NAME FROM USER_INDEXES ORDER BY INDEX_NAME, TABLE_OWNER;
+SELECT TABLE_NAME, INDEX_NAME, COLUMN_NAME FROM ALL_IND_COLUMNS WHERE TABLE_OWNER='SCOTT' ORDER BY TABLE_NAME, INDEX_NAME, COLUMN_POSITION;
+SELECT TABLE_NAME, INDEX_NAME, COLUMN_NAME FROM USER_IND_COLUMNS ORDER BY TABLE_NAME, INDEX_NAME, COLUMN_POSITION;
+--
+DROP INDEX index_name;
+
+After create an index, we have to gather statistics, otherwise Oracle won't consider it. From Oracle 10g, the new indexes will be gathered automatically if the table it is based on has data.
+Oracle just considers to use index if the result set is equal or less than 15% entire this table. Otherwise, there is no need for that index, except for JOINS or integrity data.
+AUTOTRACE - EXPLAIN PLAN
+
+
+--Bitmap Index
+Distinct column values are much less than total rows in table.
+Can index one, two or more columns: simple or composite index.
+When we combine 2  or more Bitmap index in a query, the binary numbers AND/OR: 1 & 1 = 1, 1 & 0 = 0, and so on.
+Often use in DWH, it's not useful for OLTP which has data change frequently.
+Bitmap indexes are useful for performing Ad-hoc queries.
+Simple Bitmap Indexes rather than Composite Bitmap Indexes.
+Use when degree of cardinality is low.
+Don't use on unique columns or column has a large number of distinct values. (Use B-Tree instead)
+NULLs included in Bitmap Index (not in B-Tree). When we use WHERE clause with IS NULL condition, Bitmap index could be consider. It contrasts to B-tree index.
+Uses less space than corresponding B-Tree index.
+
+CREATE BITMAP INDEX index_name ON table_name(column_name);
+DROP INDEX index_name;
+
+AUTOTRACE - EXPLAIN PLAN
+
+
+--Additional Indexes
+Function-Based Indexes
+Bitmap Join Indexes
+Index-Organized Table
+
+
+
+
+
+
+
+
+
 
 
 
@@ -63,5 +114,10 @@ Clips need to be checked:
 4. Gathering Statistics 
 4. Index and Partition interaction
 4. Example
+
 5. Create B-tree index
 5. Gathering Statistics 
+5. Is My Index Being Used?
+
+6. Create Bitmap index
+6. Is My Index Being Used?
