@@ -28,7 +28,7 @@ Pros:
 Cons:
 	Waste space: So we should create indexes on neccesary columns instead of all
 	Indexes are useful when we access a small portion of database, if we access entire a table, Oracle will ignore the indexes on this table
-	If we create an index on 2 columns but we just use 1 of them in WHERE, this index will not be called, so when we create an index on multi columns, we have to consider carefully whether we need to call these columns at once, otherwise the index will waste space
+	When we create an index on one or multi columns, we have to consider carefully whether we need to use these columns, otherwise the index will waste space
 	If the returned data is equal or less then 15% of data in a table, the index will be used. Otherwise, Oracle will ignore the index
 	INSERT, DELETE and UPDATE can be slow because not only data is modified, but also the corresponding indexes on this table
 	The index can be affected by Hard Drive. Sometimes, the powerful hardware can help the FULL TABLE SCAN is faster than INDEX scan
@@ -36,6 +36,11 @@ Cons:
 B-tree Index is an upside down of a tree with each leaf is a rowid. We use this kind of index for ID, char, number, date, ...
 Bitmap Index is used for columns with a few distinct values (Ex: male/female)
 Function-Based Index is an index which is built on a function applied to columns (Ex: CREATE INDEX first_name_idx ON user_data (gender, UPPER(first_name), dob)), Oracle developed this kind of index to avoid when we use a function on an index column, this regular index will not be called.
+Index-Organized Tables combines table and index into one object and just store based on the primary key.
+Bitmap Join Indexes to do the pre-joins two or more tables. This brings us faster joins, faster queries.
+
+Gathering Statistics
+Indexes and Partitions
 
 --B-Tree Index
 B-Tree Index is a general purpose index.
@@ -121,3 +126,7 @@ Clips need to be checked:
 
 6. Create Bitmap index
 6. Is My Index Being Used?
+
+7. Function-Based index
+
+ 
