@@ -12,6 +12,6 @@ To easily approach this knowledge, I separate it into 9 parts:
   4. Overview of indexes
   5. B-tree index
   6. Bitmap index
-  7. 
-  8. 
+  7. Additional indexes
+  8. Partition
   9. 
