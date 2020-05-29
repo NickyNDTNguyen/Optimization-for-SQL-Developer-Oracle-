@@ -97,10 +97,27 @@ AUTOTRACE - EXPLAIN PLAN
 
 --Additional Indexes
 Function-Based Indexes
+
 Bitmap Join Indexes
+Pre-Joins tables -> Reduces SQL runtime.
+Usually involves a Fact and Dimension table(s).
+One or more additional columns used for subsetting.
+Dimension table needs primary key/unique constraint.
+ON Clause -> specify dimension table's column(s) in parentheses.
+Can include more than one dimension table.
+```
+CREATE BITMAP INDEX index-name
+ON fact-table(B.dimension-column1,...)
+FROM fact-tableA,dimension-tableB
+WHERE A.key-column=B.key-column
+
+DROP INDEX index-name;
+```
+
 Index-Organized Table
 
 
+--Partition
 
 
 
@@ -128,5 +145,10 @@ Clips need to be checked:
 6. Is My Index Being Used?
 
 7. Function-Based index
-
+7. Index Organized Table
  
+ 
+9. Create list partition
+9. Create range partition
+9. Example range partition
+9. Drop a range partition
