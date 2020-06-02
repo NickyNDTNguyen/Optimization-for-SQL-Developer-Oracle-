@@ -14,5 +14,5 @@ To easily approach this knowledge, I separate it into 10 parts:
   6. [Bitmap index](./6.%20Bitmap%20index.md)
   7. [Additional indexes](./7.%20Additional%20indexes.md)
   8. [Partition](./8.%20Partition.md)
-  9. Composite partition
-  10. Index and Partition interaction
+  9. [Composite partition](./9.%20Composite%20partition.md)
+  10. [Index and Partition interaction](./10.%20Index%20and%20Partition%20interaction.md)
